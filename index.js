@@ -1,18 +1,17 @@
 
 // from jquery.autoKana
 
-var isHiragana = function(char){
-  var matcher = char.match(/[\sぁあ-んー]/)
+var isHiragana = function(str){
+  var matcher = str.match(/[\sぁあ-んー]/)
   return (matcher && matcher.length > 0) ? true : false
 }
-var isKatakana = function(char){
-  var matcher = char.match(/[\sァ-ヶー]/)
+var isKatakana = function(str){
+  var matcher = str.match(/[\sァ-ヶー]/)
   return (matcher && matcher.length > 0) ? true : false
 }
 
-
-module.exports.isHiraganaChar = isHiragana
-module.exports.isKatakanaChar = isKatakana
+module.exports.isHiragana = isHiragana
+module.exports.isKatakana = isKatakana
 
 module.exports.toKatakana = function(str){
   return str.split("").map(function(char){
@@ -25,6 +24,7 @@ module.exports.toKatakana = function(str){
 }
 
 module.exports.split = function(str){
+  str = str || ""
   var splits = []
   var currentBuffer = ""
   var currentMode

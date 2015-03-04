@@ -11,23 +11,33 @@ describe("kana", function(){
   describe("regexp char funcs", function(){
     it("い", function(){
       var val = "い"
-      assert.equal(true, kana.isHiraganaChar(val))
-      assert.equal(false, kana.isKatakanaChar(val))
+      assert.equal(true, kana.isHiragana(val))
+      assert.equal(false, kana.isKatakana(val))
     })
     it("ぃ", function(){
       var val = "ぃ"
-      assert.equal(true, kana.isHiraganaChar(val))
-      assert.equal(false, kana.isKatakanaChar(val))
+      assert.equal(true, kana.isHiragana(val))
+      assert.equal(false, kana.isKatakana(val))
     })
     it("ウ", function(){
       var val = "ウ"
-      assert.equal(false, kana.isHiraganaChar(val))
-      assert.equal(true, kana.isKatakanaChar(val))
+      assert.equal(false, kana.isHiragana(val))
+      assert.equal(true, kana.isKatakana(val))
     })
     it("ゥ", function(){
       var val = "ゥ"
-      assert.equal(false, kana.isHiraganaChar(val))
-      assert.equal(true, kana.isKatakanaChar(val))
+      assert.equal(false, kana.isHiragana(val))
+      assert.equal(true, kana.isKatakana(val))
+    })
+    it("いあああ", function(){
+      var val = "いあああ"
+      assert.equal(true, kana.isHiragana(val))
+      assert.equal(false, kana.isKatakana(val))
+    })
+    it("いあああウウウ", function(){
+      var val = "いあああウウウ"
+      assert.equal(false, kana.isHiragana(val))
+      assert.equal(false, kana.isKatakana(val))
     })
   })
   describe("to katakana", function(){
@@ -50,5 +60,24 @@ describe("kana", function(){
     it("藍雨えお下記区けこ", function(){
       assert.deepEqual(["藍雨", "えお", "下記区", "けこ"], kana.split("藍雨えお下記区けこ"))
     })
+  })
+})
+
+var parser = require("./parser")
+describe("parser", function(){
+  it("あ", function(){
+    assert.equal(parser.parse("あ").value, "あ")
+  })
+  it("ああ", function(){
+    assert.equal(parser.parse("ああ").value, "ああ")
+  })
+  it("イ", function(){
+    console.log(parser.parse("イ"))
+    //assert.equal(parser.parse("イ").value, "イ")
+  })
+  it("あイ", function(){
+    var a = parser.parse("あイ")
+    console.log(a)
+    //assert.equal(a.value, "あイ")
   })
 })
