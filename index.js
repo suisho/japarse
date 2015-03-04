@@ -13,16 +13,6 @@ var isKatakana = function(str){
 module.exports.isHiragana = isHiragana
 module.exports.isKatakana = isKatakana
 
-module.exports.toKatakana = function(str){
-  return str.split("").map(function(char){
-    if(isHiragana(char)){
-      var code = char.charCodeAt()
-      return String.fromCharCode(code + 96)
-    }
-    return char
-  }).join("")
-}
-
 module.exports.split = function(str){
   str = str || ""
   var splits = []
