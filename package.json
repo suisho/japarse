@@ -1,0 +1,22 @@
+{
+  "name": "kanautil",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --require intelli-espower-loader"
+  },
+  "environments" : {
+    "mocha" : true,
+    "node" : true
+  },
+  "keywords": [],
+  "author": "suisho",
+  "license": "ISC",
+  "devDependencies": {
+    "espower-loader": "^0.10.0",
+    "intelli-espower-loader": "^0.6.0",
+    "mocha": "^2.1.0",
+    "power-assert": "^0.10.2"
+  }
+}
