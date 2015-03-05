@@ -1,13 +1,13 @@
-
+var japanese = require("japanese")
 // from jquery.autoKana
 
 var isHiragana = function(str){
-  var matcher = str.match(/[\sぁあ-んー]/)
-  return (matcher && matcher.length > 0) ? true : false
+  var m = str.match(japanese.hiraganaRegex)
+  return (m && m.length === str.length) ? true : false
 }
 var isKatakana = function(str){
-  var matcher = str.match(/[\sァ-ヶー]/)
-  return (matcher && matcher.length > 0) ? true : false
+  var m = str.match(japanese.katakanaRegex)
+  return (m && m.length === str.length) ? true : false
 }
 
 module.exports.isHiragana = isHiragana

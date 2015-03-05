@@ -40,19 +40,9 @@ describe("kana", function(){
       assert.equal(false, kana.isKatakana(val))
     })
   })
-  describe("to katakana", function(){
-    it("正常系", function(){
-      var result = kana.toKatakana("あぅん")
-      assert.equal("アゥン", result)
-    })
-    it("ひらがな以外をど含む場合", function(){
-      var result = kana.toKatakana("あぅん鬼acdb")
-      assert.equal("アゥン鬼acdb", result)
-    })
-  })
   describe("split", function(){
     it("あいうえお", function(){
-      assert.deepEqual(["あいうえお"], kana.split("あいうえお"))
+      assert.deepEqual(["あいうえおお"], kana.split("あいうえおお"))
     })
     it("あい上お", function(){
       assert.deepEqual(["あい", "上", "お"], kana.split("あい上お"))
@@ -63,21 +53,3 @@ describe("kana", function(){
   })
 })
 
-var parser = require("./parser")
-describe("parser", function(){
-  it("あ", function(){
-    assert.equal(parser.parse("あ").value, "あ")
-  })
-  it("ああ", function(){
-    assert.equal(parser.parse("ああ").value, "ああ")
-  })
-  it("イ", function(){
-    console.log(parser.parse("イ"))
-    //assert.equal(parser.parse("イ").value, "イ")
-  })
-  it("あイ", function(){
-    var a = parser.parse("あイ")
-    console.log(a)
-    //assert.equal(a.value, "あイ")
-  })
-})
