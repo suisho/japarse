@@ -10,9 +10,6 @@ var isKatakana = function(str){
   return (m && m.length === str.length) ? true : false
 }
 
-module.exports.isHiragana = isHiragana
-module.exports.isKatakana = isKatakana
-
 var pack = function(value, hiragana, katakana){
   var obj = {
     value : value || "",
