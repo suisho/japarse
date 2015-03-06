@@ -1,55 +1,44 @@
 var assert = require("power-assert")
-var kana = require("./index")
-describe("kana", function(){
-  describe("extract kana", function(){
-  /*  it("extracting kana", function(){
-      var result = kana.extractKana("あああ山本")
-      assert.equal("あああ", result)
-    })*/
+var japarse = require("./index")
+describe("kana", function() {
+  describe("extract kana", function() {
+    /*  it("extracting kana", function(){
+        var result = kana.extractKana("あああ山本")
+        assert.equal("あああ", result)
+      })*/
   })
 
-  describe("regexp char funcs", function(){
-    it("い", function(){
-      var val = "い"
-      assert.equal(true, kana.isHiragana(val))
-      assert.equal(false, kana.isKatakana(val))
+  describe("split", function() {
+    it("あいうえお", function() {
+      assert.deepEqual([{
+        value : "あいうえおお",
+        hiragana : true,
+        katakana : false
+      }], japarse("あいうえおお"))
     })
-    it("ぃ", function(){
-      var val = "ぃ"
-      assert.equal(true, kana.isHiragana(val))
-      assert.equal(false, kana.isKatakana(val))
+    it("あい上お", function() {
+      assert.deepEqual([{
+        value : "あい",
+        hiragana : true,
+        katakana : false
+      }, {
+        value : "上",
+        hiragana : false,
+        katakana : false
+      }, {
+        value : "お",
+        hiragana : true,
+        katakana : false
+      }, ], japarse("あい上お"))
     })
-    it("ウ", function(){
-      var val = "ウ"
-      assert.equal(false, kana.isHiragana(val))
-      assert.equal(true, kana.isKatakana(val))
-    })
-    it("ゥ", function(){
-      var val = "ゥ"
-      assert.equal(false, kana.isHiragana(val))
-      assert.equal(true, kana.isKatakana(val))
-    })
-    it("いあああ", function(){
-      var val = "いあああ"
-      assert.equal(true, kana.isHiragana(val))
-      assert.equal(false, kana.isKatakana(val))
-    })
-    it("いあああウウウ", function(){
-      var val = "いあああウウウ"
-      assert.equal(false, kana.isHiragana(val))
-      assert.equal(false, kana.isKatakana(val))
-    })
-  })
-  describe("split", function(){
-    it("あいうえお", function(){
-      assert.deepEqual(["あいうえおお"], kana.split("あいうえおお"))
-    })
-    it("あい上お", function(){
-      assert.deepEqual(["あい", "上", "お"], kana.split("あい上お"))
-    })
-    it("藍雨えお下記区けこ", function(){
-      assert.deepEqual(["藍雨", "えお", "下記区", "けこ"], kana.split("藍雨えお下記区けこ"))
+    it("藍雨えお下記区ケコ", function() {
+      assert.deepEqual([
+        {value:"藍雨", hiragana: false, katakana :false },
+        {value:"えお", hiragana: true, katakana :false },
+        {value:"下記区", hiragana: false, katakana :false },
+        {value:"ケコ", hiragana: false, katakana :true }
+      ],
+      japarse("藍雨えお下記区ケコ"))
     })
   })
 })
-

@@ -13,24 +13,44 @@ var isKatakana = function(str){
 module.exports.isHiragana = isHiragana
 module.exports.isKatakana = isKatakana
 
-module.exports.split = function(str){
-  str = str || ""
-  var splits = []
-  var currentBuffer = ""
-  var currentMode
-  str.split("").forEach(function(char){
-    var kanaFlag = isHiragana(char)
-    if(currentMode === undefined){ // initalize
-      currentMode = kanaFlag
-    }
-    // console.log(char, kanaFlag, currentMode, currentBuffer)
-    if(currentMode !== kanaFlag){
-      splits.push(currentBuffer)
-      currentBuffer = ""
-      currentMode = kanaFlag
-    }
-    currentBuffer += char
+var buildObject = function(char, hiragana, katakana){
+  return {
+    value : char,
+    hiragana : isHiragana(char),
+    katakana : isKatakana(char)
+  }
+}
+var pack = function(value, hiragana, katakana){
+  return {
+    value : value || "",
+    hiragana : hiragana || false,
+    katakana : katakana || false
+  }
+}
+
+var compare = function(obj1, obj2){
+  return ["hiragana", "katakana"].every(function(key){
+    return obj1[key] === obj2[key]
   })
-  splits.push(currentBuffer)
+}
+module.exports = function(str){
+  var splits = []
+  var chars = (str || "").split("")
+  var charObjs = chars.map(function(char){
+    return pack(
+      char,
+      isHiragana(char),
+      isKatakana(char)
+    )
+  })
+  var rest = charObjs.reduce(function(a, b){
+    if(compare(a, b)){
+      return pack(a.value + b.value, a.hiragana, a.katakana)
+    }else{
+      splits.push(a)
+      return b
+    }
+  })
+  splits.push(rest)
   return splits
 }
