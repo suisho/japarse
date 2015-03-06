@@ -13,19 +13,17 @@ var isKatakana = function(str){
 module.exports.isHiragana = isHiragana
 module.exports.isKatakana = isKatakana
 
-var buildObject = function(char, hiragana, katakana){
-  return {
-    value : char,
-    hiragana : isHiragana(char),
-    katakana : isKatakana(char)
-  }
-}
 var pack = function(value, hiragana, katakana){
-  return {
+  var obj = {
     value : value || "",
-    hiragana : hiragana || false,
-    katakana : katakana || false
   }
+  if(hiragana){
+    obj.hiragana = hiragana
+  }
+  if(katakana){
+    obj.katakana = katakana
+  }
+  return obj
 }
 
 var compare = function(obj1, obj2){

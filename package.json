@@ -6,9 +6,9 @@
   "scripts": {
     "test": "mocha --require intelli-espower-loader"
   },
-  "environments" : {
-    "mocha" : true,
-    "node" : true
+  "environments": {
+    "mocha": true,
+    "node": true
   },
   "keywords": [],
   "author": "suisho",
