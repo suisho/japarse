@@ -11,34 +11,45 @@ describe("kana", function() {
   describe("split", function() {
     it("あいうえお", function() {
       assert.deepEqual([{
-        value : "あいうえおお",
-        hiragana : true,
-        katakana : false
+        value: "あいうえおお",
+        hiragana: true,
+        katakana: false
       }], japarse("あいうえおお"))
     })
     it("あい上お", function() {
       assert.deepEqual([{
-        value : "あい",
-        hiragana : true,
-        katakana : false
+        value: "あい",
+        hiragana: true,
+        katakana: false
       }, {
-        value : "上",
-        hiragana : false,
-        katakana : false
+        value: "上",
+        hiragana: false,
+        katakana: false
       }, {
-        value : "お",
-        hiragana : true,
-        katakana : false
+        value: "お",
+        hiragana: true,
+        katakana: false
       }, ], japarse("あい上お"))
     })
     it("藍雨えお下記区ケコ", function() {
-      assert.deepEqual([
-        {value:"藍雨", hiragana: false, katakana :false },
-        {value:"えお", hiragana: true, katakana :false },
-        {value:"下記区", hiragana: false, katakana :false },
-        {value:"ケコ", hiragana: false, katakana :true }
-      ],
-      japarse("藍雨えお下記区ケコ"))
+      assert.deepEqual([{
+          value: "藍雨",
+          hiragana: false,
+          katakana: false
+        }, {
+          value: "えお",
+          hiragana: true,
+          katakana: false
+        }, {
+          value: "下記区",
+          hiragana: false,
+          katakana: false
+        }, {
+          value: "ケコ",
+          hiragana: false,
+          katakana: true
+        }],
+        japarse("藍雨えお下記区ケコ"))
     })
   })
 })
