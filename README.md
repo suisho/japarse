@@ -1,5 +1,6 @@
-# Japarse
+# Japarser
 > Japanese string parser
+
 # Install
 
 ```
@@ -36,4 +37,4 @@ These objects are consist of the following fields:
 - `katakana` : True if Katakana
 
 # TODO
-- 半角カナ (`hankaku` and `zenkaku` fields)
+- 半角カナ (`hankaku` fields)
